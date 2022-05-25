@@ -10,7 +10,7 @@ stages:
 
 cache:
   paths:
-    - node_modules/
+    - node_modules
     - docs-dist
 
 # ssh 免登录
