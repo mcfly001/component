@@ -4,6 +4,8 @@ import './index.less';
 interface RankListProps {
   data: { label: string; value: string | number }[];
 }
+
+
 function RankList({ data }: RankListProps) {
   return (
     <div className="rank-list">
@@ -30,7 +32,7 @@ function RankList({ data }: RankListProps) {
             ))}
         </ul>
       ) : (
-        <div className="empty">暂无数据</div>
+        <div className="empty">目前暂无数据，请先检查</div>
       )}
     </div>
   );
