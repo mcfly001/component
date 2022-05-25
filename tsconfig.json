@@ -5,14 +5,20 @@
     "moduleResolution": "node",
     "jsx": "react",
     "esModuleInterop": true,
-    "types": ["jest"],
+    "types": [
+      "jest"
+    ],
     "baseUrl": "./",
     "strict": true,
     "skipLibCheck": true,
     "declaration": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": ["src/.umi/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@@/*": [
+        "src/.umi/*"
+      ]
     },
     "allowSyntheticDefaultImports": true
   },
