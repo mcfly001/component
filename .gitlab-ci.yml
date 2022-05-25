@@ -1,0 +1,61 @@
+variables:
+  # 定义构建的Tag
+  TAG: "dumi-gitlab-runner"
+
+# 定义 stages（阶段，会依次执行）
+stages:
+  - install_deps
+  - build_prod
+  - deploy_prod
+
+cache:
+  paths:
+    - node_modules/
+    - docs-dist
+
+# ssh 免登录
+before_script:
+  - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
+  - ssh-keyscan 43.142.65.127 >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+
+
+# 安装构建依赖
+install_deps_job:
+  stage: install_deps
+  # 在哪个分支才会执行脚本
+  only:
+    - main
+  script:
+    - echo '开始安装依赖'
+    - npm install --registry=https://registry.npmmirror.com/
+  tags:
+    - $TAG
+
+# 构建预prod环境src目录下应用
+build_prod_job:
+  stage: build_prod
+  only:
+    - main
+  script:
+    - echo '开始进行打包'
+    - npm run docs:build
+  tags:
+    - $TAG
+
+# 部署生产环境
+deploy_prod_job:
+  stage: deploy_prod
+  only:
+    - main
+  script:
+    - echo '部署生产环境阶段'
+    - scp -r docs-dist/* root@43.142.65.127:/home/tomcat/
+  tags:
+    - $TAG
+

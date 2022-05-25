@@ -18,6 +18,7 @@
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
+  "homepage": ".",
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
       "prettier --write"
