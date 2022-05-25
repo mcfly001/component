@@ -8,4 +8,21 @@ export default defineConfig({
   outputPath: 'docs-dist',
   mode: 'site',
   // more config: https://d.umijs.org/config
+  extraBabelPlugins: [
+    [
+      'babel-plugin-import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+      },
+    ],
+  ],
+  apiParser: {
+    // 自定义属性过滤配置，也可以是一个函数，用法参考：https://github.com/styleguidist/react-docgen-typescript/#propfilter
+    propFilter: {
+      // 是否忽略从 node_modules 继承的属性，默认值为 false
+      skipNodeModules: true,
+    },
+  },
 });
