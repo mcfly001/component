@@ -8,6 +8,8 @@ stages:
   - build_prod
   - deploy_prod
 
+image: node:16
+
 cache:
   paths:
     - node_modules
