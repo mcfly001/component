@@ -16,15 +16,7 @@ export default defineConfig({
         libraryDirectory: 'es',
         style: true,
       },
-    ],
-    [
-      'babel-plugin-import',
-      {
-        libraryName: 'tntd',
-        libraryDirectory: 'es',
-        style: true,
-      },
-    ],
+    ]
   ],
   apiParser: {
     // 自定义属性过滤配置，也可以是一个函数，用法参考：https://github.com/styleguidist/react-docgen-typescript/#propfilter
